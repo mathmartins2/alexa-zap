@@ -17,11 +17,13 @@ create({
     console.log(erro);
 });
 
+app.get('/', (req, res) => {
+    return res.send('Hello World!');
+});
+
 const start = async (client) => {
-    console.log('msg')
     app.post('/sendMessage', async (req, res) => {
         const { message, from } = req.body;
-
 
         if(!message || !from) {
             return res.status(400).json({
