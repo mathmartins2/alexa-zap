@@ -10,7 +10,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 create({
-    session: 'alexa',
+    session: 'alexa' + Date.now(),
+    headless: false
   })
   .then((client) => start(client))
   .catch((erro) => {
