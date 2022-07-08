@@ -57,8 +57,8 @@ const start = async (client) => {
             return res.status(500).json({message: 'Error sending message'});
         }
     });
+    
+    app.listen(port, () => {
+        console.log(`listening on port ${port}`);
+    });
 }
-
-app.listen(port, () => {
-    console.log(`listening on port ${port}`);
-});
