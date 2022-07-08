@@ -35,6 +35,7 @@ app.get('/', (req, res) => {
 const start = async (client) => {
     app.post('/sendMessage', async (req, res) => {
         const { message, from } = req.body;
+        console.log(message, from);
 
         if(!message || !from) {
             return res.status(400).json({
