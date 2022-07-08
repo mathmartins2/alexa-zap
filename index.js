@@ -21,8 +21,8 @@ const chromiumArgs = [
 
 create({
     session: 'alexa',
-    browserArgs: chromiumArgs,
-    useChrome: false
+    //browserArgs: chromiumArgs,
+    //useChrome: false
   })
   .then((client) => start(client))
   .catch((erro) => {
