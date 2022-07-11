@@ -33,9 +33,12 @@ app.get('/', (req, res) => {
     return res.send('Hello World!');
 });
 
+let contacts_ = [];
+
 const start = async (client) => {
     app.post('/sendMessage', async (req, res) => {
         const { message, from } = req.body;
+        let contact;
         
         if(!message || !from) {
             return res.status(400).json({
@@ -44,10 +47,12 @@ const start = async (client) => {
         }
 
         try {
-            console.log(client);
-            const contacts = await client.getAllContacts();
-            console.log(2);
-            const contact = contacts.filter((contact) => contact.name === from);
+            if(contacts_.length === 0) {
+                const contacts = await client.getAllContacts();
+                contacts_.push(contacts);
+            }
+
+            contact = contacts_.filter((contact) => contact.name === from);
 
             if (contact.length === 0) {
                 return res.status(400).json({ error: 'Contact not found' });
