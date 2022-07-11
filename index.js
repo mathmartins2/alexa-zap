@@ -44,7 +44,7 @@ const start = async (client) => {
         }
 
         try {
-            console.log(1);
+            console.log(client);
             const contacts = await client.getAllContacts();
             console.log(2);
             const contact = contacts.filter((contact) => contact.name === from);
