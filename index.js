@@ -38,7 +38,7 @@ let contacts_ = [];
 const start = async (client) => {
     app.post('/sendMessage', async (req, res) => {
         const { message, from } = req.body;
-        let contact;
+        let contact_;
         
         if(!message || !from) {
             return res.status(400).json({
@@ -52,13 +52,13 @@ const start = async (client) => {
                 contacts_.push(contacts);
             }
 
-            contact = contacts_.filter((contact) => contact.name === from);
+            contact_ = contacts_.filter((contact) => contact.name === from);
 
-            if (contact.length === 0) {
+            if (contact_.length === 0) {
                 return res.status(400).json({ error: 'Contact not found' });
             } 
 
-            await client.sendText(contact[0].id._serialized, message);
+            await client.sendText(contact_[0].id._serialized, message);
             return res.status(200).json({message: 'Message sent'});
         } catch (error) {
             return res.status(500).json({message: 'Error sending message', error});
