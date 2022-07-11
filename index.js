@@ -36,8 +36,7 @@ app.get('/', (req, res) => {
 const start = async (client) => {
     app.post('/sendMessage', async (req, res) => {
         const { message, from } = req.body;
-        console.log(message, from);
-
+        
         if(!message || !from) {
             return res.status(400).json({
                 error: 'Missing parameters'
@@ -45,14 +44,16 @@ const start = async (client) => {
         }
 
         try {
-            // const contacts = await client.getAllContacts();
-            // const contact = contacts.filter((contact) => contact.name === from);
+            console.log(1);
+            const contacts = await client.getAllContacts();
+            console.log(2);
+            const contact = contacts.filter((contact) => contact.name === from);
 
-            // if (contact.length === 0) {
-            //     return res.status(400).json({ error: 'Contact not found' });
-            // } 
+            if (contact.length === 0) {
+                return res.status(400).json({ error: 'Contact not found' });
+            } 
 
-            await client.sendText('', message);
+            await client.sendText(contact[0].id._serialized, message);
             return res.status(200).json({message: 'Message sent'});
         } catch (error) {
             return res.status(500).json({message: 'Error sending message', error});
