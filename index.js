@@ -28,7 +28,7 @@ client.on('qr', (qr) => {
 });
 
 client.on('ready', () => {
-    app.get('/sendMessage', async (req, res) => {
+    app.post('/sendMessage', async (req, res) => {
         try {
             const {from, message} = req.body;
 
