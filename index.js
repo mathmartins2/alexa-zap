@@ -28,6 +28,7 @@ client.on('qr', (qr) => {
 });
 
 client.on('ready', () => {
+    console.log('Client is ready');
     app.post('/sendMessage', async (req, res) => {
         try {
             const {from, message} = req.body;
@@ -62,4 +63,3 @@ client.on('ready', () => {
 });
 
 client.initialize();
-
