@@ -9,7 +9,18 @@ app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
 const client = new Client({
-    authStrategy: new LocalAuth({ clientId: "alexa" })
+    authStrategy: new LocalAuth({ clientId: "alexa" }),
+    puppeteer: {
+    headless: true,
+    args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-accelerated-2d-canvas',
+        '--no-first-run',
+        '--no-zygote',
+        '--disable-gpu'
+    ]}
 });
 
 client.on('qr', (qr) => {
